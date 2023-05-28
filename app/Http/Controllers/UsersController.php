@@ -21,9 +21,11 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $microposts = $user->microposts()->paginate(10);
 
         return view('users.show', [
             'user' => $user,
+            'microposts' => $microposts,
         ]);
     }
 
